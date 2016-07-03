@@ -61,7 +61,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'ap/vim-css-color'
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'marijnh/tern_for_vim'
-"Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdcommenter'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -92,7 +92,7 @@ inoremap <D-S-Up> <ESC>:m .-2<CR>==gi
 "Map Ctrl+n to toggle Nerdtree"
 map <C-n> :NERDTreeToggle<CR>
 let g:NERDTrimTrailingWhitespace = 1
-
+let g:NERDTreeIgnore=['\~$', 'vendor', 'bower_components', 'node_modules']
 "Map for emmet autocomplete"
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 let delimitMate_expand_cr=1

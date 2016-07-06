@@ -33,4 +33,16 @@ autocmd filetype nerdtree syn match scss_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match gulp_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match xml_icon ## containedin=NERDTreeFile
 autocmd filetype nerdtree syn match gitdiff_icon #✹# containedin=NERDTreeFile
-  
+
+"NerdTree Git Icons"
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }

@@ -78,7 +78,8 @@ noremap <D-0> :tablast<CR>
 map <C-n> :NERDTreeToggle<CR>
 let g:NERDTrimTrailingWhitespace = 1
 let g:NERDTreeIgnore=['\~$', 'vendor', 'bower_components', 'node_modules']
-
+let NERDTreeShowHidden=1
+let g:ctrlp_show_hidden = 1
 "========Map for emmet autocomplete======="
 "let g:user_emmet_install_global = 0
 "autocmd FileType html,css,scss,php,vue EmmetInstall

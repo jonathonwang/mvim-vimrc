@@ -41,9 +41,12 @@ filetype plugin indent on    " required
 "set <Leader> to be ',' instead of default '\'"
 let mapleader=","
 set timeout timeoutlen=1500
-" Insert mode - Make it easy to move lines (Ctrl + down / Ctrl + up )"
+" Insert mode - Make it easy to move lines (Command + down / Command + up )"
 inoremap <D-S-Down> <ESC>:m .+1<CR>==gi
 inoremap <D-S-Up> <ESC>:m .-2<CR>==gi
+"Visual mode - Make it easy to move blocks of text"
+vnoremap <D-S-Down> :m '>+1<CR>gv=gv
+vnoremap <D-S-Up> :m '<-2<CR>gv=gv
 
 "Function to rename file with <leader>r"
 function! RenameFile()
@@ -82,8 +85,15 @@ let g:NERDTreeIgnore=['\~$', 'vendor', 'bower_components', 'node_modules']
 let NERDTreeShowHidden=1
 
 "================CtrlP Settings===================="
-let g:ctrlp_show_hidden = 1
+let g:ctrlp_show_hidden=1
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_switch_buffer=1
+"macmenu File.Print key=<nop>
+"map <D-p> <nop> 
+"let g:ctrlp_map = '<D-p>'
+"default to opening in new tab"
+let g:CommandTAcceptSelectionMap = '<C-t>'
+let g:CommandTAcceptSelectionTabMap = '<CR>'
 set wildignore+=*/node_modules/**
 set wildignore+=*/bower_components/**
 set wildignore+=*/vendor/**
@@ -91,6 +101,9 @@ set wildignore+=*/vendor/**
 "========Emmet autocomplete======="
 "Insert Mode - Shift+Tab for emmet autocomplete"
 imap <expr> <S-tab> emmet#expandAbbrIntelligent("\<S-tab>")
+"Insert Mode - Ctrl+Tab for general autocomplete"
+imap <C-tab> <C-p>tab
+"Make delimitMate expand tags with a return and tab"
 let delimitMate_expand_cr=1
 
 "Change update time for vim-gitgutter"

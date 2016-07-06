@@ -74,19 +74,24 @@ noremap <D-9> :tabn 9<CR>
 " Command-0 goes to the last tab
 noremap <D-0> :tablast<CR>
 
+"===============NerdTree Options=================="
 "Map Ctrl+n to toggle Nerdtree"
 map <C-n> :NERDTreeToggle<CR>
 let g:NERDTrimTrailingWhitespace = 1
 let g:NERDTreeIgnore=['\~$', 'vendor', 'bower_components', 'node_modules']
 let NERDTreeShowHidden=1
+
+"================CtrlP Settings===================="
 let g:ctrlp_show_hidden = 1
-"========Map for emmet autocomplete======="
-"let g:user_emmet_install_global = 0
-"autocmd FileType html,css,scss,php,vue EmmetInstall
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+set wildignore+=*/node_modules/**
+set wildignore+=*/bower_components/**
+set wildignore+=*/vendor/**
+
+"========Emmet autocomplete======="
 "Insert Mode - Shift+Tab for emmet autocomplete"
 imap <expr> <S-tab> emmet#expandAbbrIntelligent("\<S-tab>")
 let delimitMate_expand_cr=1
-"Map for syntax errors on open"
 
 "Change update time for vim-gitgutter"
 set updatetime=250
@@ -96,22 +101,15 @@ let g:airline_theme='solarized'
 
 "Change Nerdtree Glyphicons Colors"
 :so ~/.vim/iconsettings.vim
-"let g:webdevicons_conceal_nerdtree_brackets = 0
-"let g:WebDevIconsNerdTreeAfterGlyphPadding = ''
 
-"===========CtrlP Settings=============="
-set wildignore+=*/node_modules/**
-set wildignore+=*/bower_components/**
-set wildignore+=*/vendor/**
-
-
-
-"============Auto-Commands=============="
 "Let syntastic scan for errors on file open"
 let g:syntastic_check_on_open=1
 let g:tsuquyomi_disable_quickfix = 1
+"use Tsuquyomi for typescript linter"
 let g:syntastic_typescript_checkers = ['tsuquyomi'] " You shouldn't use 'tsc' checker.
 
+
+"============Auto-Commands=============="
 "Autimatically source the Vimrc file on save."
 autocmd BufWritePost .vimrc source %
 autocmd BufWritePost .gvimrc source %

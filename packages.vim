@@ -5,6 +5,7 @@ Plugin 'gmarik/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
 
 " Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
@@ -39,6 +40,7 @@ Plugin 'isRuslan/vim-es6'
 Plugin 'jwalton512/vim-blade'
 Plugin 'darthmall/vim-vue'
 Plugin 'leshill/vim-json'
+Plugin 'tpope/vim-markdown'
 
 Plugin 'Quramy/vim-js-pretty-template'
 Plugin 'heavenshell/vim-jsdoc'
@@ -47,7 +49,7 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Quramy/tsuquyomi'
 
-"Plugin 'marijnh/tern_for_vim'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'marijnh/tern_for_vim'
+Plugin 'Valloric/YouCompleteMe'
 
 

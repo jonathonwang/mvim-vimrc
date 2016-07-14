@@ -5,16 +5,19 @@ set noswapfile
 "================Visual Stuff================"
 filetype on                  " required
 filetype indent on
-colorscheme hybrid_material
 set background=dark
-"Remove Scrollbars Visibility"
+colorscheme hybrid_material
+"colorscheme solarized
 set anti enc=utf-8
 "Set macvim font + Nerdtree glyphs made with fontforge -script font-patcher"
 set guifont=Office\ Code\ Pro\ Light\ Nerd\ Font:h14
-
+set autoread                                                                                                                                                                     
+au CursorHold * checktime  
 set scrolloff=2
-"set autoindent
-"set smartindent
+set cursorline " highlight current line
+set wildmenu   " visual autocomplete for command menu
+set incsearch  " search as characters are entered
+set hlsearch   " highlight matches
 set guioptions-=R
 set guioptions-=r
 set guioptions-=L
@@ -26,7 +29,9 @@ set t_vb=
 set tabstop=2
 set ai
 set si
-
+":set colorcolumn=72
+" Ignoring case is a fun trick
+set ignorecase
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -44,19 +49,20 @@ let mapleader=","
 set timeout timeoutlen=1500
 
 "highlight selected line with ,l"
-noremap <leader>l <ESC>vV
+"noremap <leader>l <ESC>vV
 nnoremap <leader>d <ESC>vYP<ESC>
 vnoremap <leader>d <ESC>vYP<ESC>v
 
 "Remap Command+/ to toggle Comments"
 map <D-/> <plug>NERDCommenterToggle
+
 "Command L select Line"
-"inoremap <D-l> <ESC>vV
-"nnoremap <D-l> <ESC>vV
-"vnoremap <D-l> <ESC>vV
+inoremap <D-l> <ESC>vV
+nnoremap <D-l> <ESC>vV
+vnoremap <D-l> <ESC>vV
 "Key bindings to deal with auto-indenting on new line creations"
 "Shift+Tab for autoindent in | Shift+enter to autoIndent between tags"
-inoremap <S-Tab> <up><end><CR><tab><down><backspace><backspace>
+"inoremap <S-Tab> <up><end><CR><tab><down><backspace><backspace>
 inoremap <S-Return> <CR><Tab><CR><left><delete><up><end>
 " Insert mode - Make it easy to move lines (Command +shift+ down / Command +shift+ up )"
 inoremap <D-S-Down> <ESC>:m .+1<CR>==gi
@@ -69,51 +75,33 @@ vnoremap <D-S-Up> :m '<-2<CR>gv=gv
 "Visual mode - make tab and shift+tab work for indent and unindent"
 "would expect it to work coming from sublime / atom"
 vnoremap <Tab> ><CR>gv
-"vnoremap <S-Tab> <<CR>gv
-
-"Remap Command + Shift + Arrow to start highlighting text - insert / normal mode"
-inoremap <D-S-Up> <ESC>v<Up>
-inoremap <D-S-Down> <ESC>v<Down>
-inoremap <D-S-Left> <ESC>v<Left>
-inoremap <D-S-Right> <ESC>v<Right>
-nnoremap <D-S-Up> <ESC>v<Up>
-nnoremap <D-S-Down> <ESC>v<Down>
-nnoremap <D-S-Left> <ESC>v<Left>
-nnoremap <D-S-Right> <ESC>v<Right>
-
+vnoremap <S-Tab> <<CR>gv
 "map <leader>cl <nop>
 "map <leader>cl 
-
-"Visual Mode, surround highlighted text with quotes"
-"vnoremap <'> \q c''<ESC>P
-"vnoremap <"> \q c""<ESC>P
-"Use Shift + arrow to highlight text"
-"let macvim_hig_shift_movement = 1
-"nmap <S-Up> v<Up>
-"nmap <S-Down> v<Down>
-"nmap <S-Left> v<Left>
-"nmap <S-Right> v<Right>
-"vmap <S-Up> <Up>
-"vmap <S-Down> <Down>
-"vmap <S-Left> <Left>
-"vmap <S-Right> <Right>
+"let g:minimap_toggle='<leader>mm'
 
 "========Emmet autocomplete======="
 "Insert Mode - Tab for emmet autocomplete"
-imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
-imap <C-p> <nop>
-imap <C-p> <ESC>:CtrlP<CR>
+imap <expr> <S-Tab> emmet#expandAbbrIntelligent("\<S-Tab>")
+noremap <D-p> <ESC>:CtrlP<CR>
 "Insert Mode - Ctrl+Tab for general autocomplete"
 inoremap <C-tab> <C-p>tab
 
+
+
 "Duplicate Current line and paste under"
-"imap <D-S-d> <nop>
-"inoremap <D-S-d> <ESC>vVy<end>i<CR><D-v>
-"imap <D-l> <nop>
-"inoremap <D-l> <ESC>vV
+map <D-S-d> <nop>
+map <D-S-d> <ESC>vVy<end>i<CR><D-v>
+map <D-l> <nop>
+map <D-l> <ESC>vV
+
+
+
 "Normal Mode - Make tab and Shift+tab switch panels"
 nnoremap <Tab> <c-w>w
 nnoremap <S-Tab> <c-w>W
+
+noremap <D-f> <ESC>/
 
 "Switch to specific tab numbers with Command-number
 noremap <D-1> <ESC>:tabn 1<CR>
@@ -135,7 +123,21 @@ let g:NERDTreeMouseMode = 3
 let g:NERDTrimTrailingWhitespace = 1
 let g:NERDTreeIgnore=['\~$', 'vendor', 'bower_components', 'node_modules']
 let NERDTreeShowHidden=1
+let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 let g:ycm_auto_trigger = 1
+
+"==========Nerd Commenter Mapping ============"
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
 "================CtrlP Settings===================="
 let g:ctrlp_show_hidden=1
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
@@ -148,36 +150,23 @@ set wildignore+=*/vendor/**
 "Make delimitMate expand tags with a return and tab"
 let delimitMate_expand_cr=1
 
+"Tagbar Mappings"
+noremap <D-Bslash> :TagbarToggle<CR>
+
+let g:tagbar_show_linenumbers = 1
+
+
 "Change update time for vim-gitgutter"
 set updatetime=250
 
 "Change Airline Theme"
 let g:airline_theme='solarized'
 
-"YouCompleteMe Mappings"
-"inoremap <D-backspace> <ESC>vV<delete>i
-let g:ycm_key_list_select_completion = ['<Down>']
-let g:ycm_key_list_previous_completion = ['<Up>']
-let g:ycm_key_invoke_completion = '<Enter>'
-let g:ycm_min_num_of_chars_for_completion = 3
-"inoremap <D-backspace> <nop>
-let g:ycm_filetype_blacklist = {
-      \ 'tagbar' : 1,
-      \ 'qf' : 1,
-      \ 'notes' : 1,
-      \ 'markdown' : 1,
-      \ 'unite' : 1,
-      \ 'text' : 1,
-      \ 'vimwiki' : 1,
-      \ 'pandoc' : 1,
-      \ 'infolog' : 1,
-      \ 'mail' : 1,
-      \}
 "Change Nerdtree Glyphicons Colors"
 :so ~/.vim/iconsettings.vim
 "Let syntastic scan for errors on file open"
 let g:syntastic_check_on_open=1
-let g:tsuquyomi_disable_quickfix = 1
+let g:tsuquyomi_disable_quickfix = 0
 "use Tsuquyomi for typescript linter"
 let g:syntastic_typescript_checkers = ['tsuquyomi'] " You shouldn't use 'tsc' checker.
 
@@ -190,4 +179,11 @@ autocmd BufWritePost .gvimrc source %
 autocmd BufNewFile,BufRead *.ts set syntax=typescript
 autocmd BufNewFile,BufRead *.ts set filetype=typescript
 autocmd BufNewFile,BufRead *.vue set syntax=vue
-autocmd FileType javascript,typescript JsPreTmpl html
+autocmd BufNewFile,BufRead *.tsx set filetype=typescript
+autocmd BufNewFile,BufRead *.tsx set syntax=typescript
+
+"Auto Adjust size of Quickfix window"
+au FileType qf call AdjustWindowHeight(3, 10)
+function! AdjustWindowHeight(minheight, maxheight)
+  exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
+endfunction

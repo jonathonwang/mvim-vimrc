@@ -9,6 +9,11 @@ Plugin 'altercation/vim-colors-solarized'
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+
+"Plugin for Custom Start Page"
+" Plugin 'mhinz/vim-startify';
+" Plugin 'terryma/vim-multiple-cursors'
 
 " Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
@@ -66,8 +71,10 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Quramy/tsuquyomi'
 
+" Plugin 'KabbAmine/gulp-vim'
+
 Plugin 'marijnh/tern_for_vim'
 Plugin 'ramitos/jsctags'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 
 

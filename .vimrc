@@ -6,9 +6,11 @@ set noswapfile
 filetype on                  " required
 filetype indent on
 set background=dark
+set laststatus=2
+set showtabline=1
 colorscheme hybrid_material
-"colorscheme solarized
 set anti enc=utf-8
+
 "Set macvim font + Nerdtree glyphs made with fontforge -script font-patcher"
 set guifont=Office\ Code\ Pro\ Light\ Nerd\ Font:h14
 set autoread                                                                                                                                                                     
@@ -17,7 +19,7 @@ set scrolloff=2
 set cursorline " highlight current line
 set wildmenu   " visual autocomplete for command menu
 set incsearch  " search as characters are entered
-set hlsearch   " highlight matches
+" set hlsearch   " highlight matches
 set guioptions-=R
 set guioptions-=r
 set guioptions-=L
@@ -29,6 +31,9 @@ set t_vb=
 set tabstop=2
 set ai
 set si
+if has("gui_macvim")
+	set fullscreen
+endif
 ":set colorcolumn=72
 " Ignoring case is a fun trick
 set ignorecase
@@ -74,24 +79,28 @@ vnoremap <D-S-Down> :m '>+1<CR>gv=gv
 vnoremap <D-S-Up> :m '<-2<CR>gv=gv
 "Visual mode - make tab and shift+tab work for indent and unindent"
 "would expect it to work coming from sublime / atom"
+nnoremap <Tab> v><ESC>
+nnoremap <S-Tab> v<<ESC>
 vnoremap <Tab> ><CR>gv
 vnoremap <S-Tab> <<CR>gv
-"map <leader>cl <nop>
-"map <leader>cl 
-"let g:minimap_toggle='<leader>mm'
+
 
 "========Emmet autocomplete======="
 "Insert Mode - Tab for emmet autocomplete"
 imap <expr> <S-Tab> emmet#expandAbbrIntelligent("\<S-Tab>")
 noremap <D-p> <ESC>:CtrlP<CR>
 "Insert Mode - Ctrl+Tab for general autocomplete"
-inoremap <C-tab> <C-p>tab
+inoremap <D-tab> <C-p>tab
 
 
-
+"Multiple Cursor"
+" let g:multi_cursor_use_default_mapping=0
+" let g:multi_cursor_next_key='<D-d>'
+" let g:multi_cursor_quit_key='<ESC>'
+" 
 "Duplicate Current line and paste under"
-map <D-S-d> <nop>
-map <D-S-d> <ESC>vVy<end>i<CR><D-v>
+map <D-D> <nop>
+noremap <D-D> <ESC>vVyi<end><CR><ESC>vp<ESC>i<up><del><esc>
 map <D-l> <nop>
 map <D-l> <ESC>vV
 
@@ -101,8 +110,9 @@ map <D-l> <ESC>vV
 nnoremap <Tab> <c-w>w
 nnoremap <S-Tab> <c-w>W
 
-noremap <D-f> <ESC>/
-
+nnoremap <D-f> <ESC>/
+inoremap <D-f> <ESC>/
+vnoremap <D-f> <ESC>/
 "Switch to specific tab numbers with Command-number
 noremap <D-1> <ESC>:tabn 1<CR>
 noremap <D-2> <ESC>:tabn 2<CR>
@@ -118,7 +128,7 @@ noremap <D-0> <ESC>:tablast<CR>
 
 "===============NerdTree Options=================="
 "Map Ctrl+n to toggle Nerdtree"
-map <C-n> :NERDTreeToggle<CR>
+map <D-n> :NERDTreeToggle<CR>
 let g:NERDTreeMouseMode = 3
 let g:NERDTrimTrailingWhitespace = 1
 let g:NERDTreeIgnore=['\~$', 'vendor', 'bower_components', 'node_modules']
@@ -126,7 +136,13 @@ let NERDTreeShowHidden=1
 let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
+
+"You Complete Me Mappings
+let g:key_list_select_completion = ['<Down>']
+let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_auto_trigger = 1
+let g:tern_show_argument_hints='on_hold'
+let g:tern_map_keys=0
 
 "==========Nerd Commenter Mapping ============"
 " Add spaces after comment delimiters by default
@@ -160,7 +176,46 @@ let g:tagbar_show_linenumbers = 1
 set updatetime=250
 
 "Change Airline Theme"
-let g:airline_theme='solarized'
+let g:airline_theme='hybrid'
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_tab_type = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+if !exists('g:airline_symbols')
+	let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = ''
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_sep = ''
+let g:airline_symbols.linenr = ''
+let g:airline_symbols.linenr = ''
+let g:airline_symbols.linenr = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.paste = ''
+let g:airline_symbols.paste = ''
+let g:airline_symbols.paste = ''
+let g:airline_symbols.whitespace = ''
+
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#show_tabs = 1
+let g:airline#extensions#tabline#show_tab_nr = 0
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#close_symbol = '×'
+let g:airline#extensions#tabline#show_close_button = 0
+
 
 "Change Nerdtree Glyphicons Colors"
 :so ~/.vim/iconsettings.vim
@@ -169,6 +224,7 @@ let g:syntastic_check_on_open=1
 let g:tsuquyomi_disable_quickfix = 0
 "use Tsuquyomi for typescript linter"
 let g:syntastic_typescript_checkers = ['tsuquyomi'] " You shouldn't use 'tsc' checker.
+
 
 "============Auto-Commands=============="
 "Autimatically source the Vimrc file on save."

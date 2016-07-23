@@ -5,16 +5,35 @@ set noswapfile
 "================Visual Stuff================"
 filetype on                  " required
 filetype indent on
+filetype plugin on
 set background=dark
 set laststatus=2
 set showtabline=1
 colorscheme hybrid_material
 set anti enc=utf-8
-
+set expandtab
 "Set macvim font + Nerdtree glyphs made with fontforge -script font-patcher"
 set guifont=Office\ Code\ Pro\ Light\ Nerd\ Font:h14
-set autoread                                                                                                                                                                     
-au CursorHold * checktime  
+" set guifont=SauceCodePro\ Nerd\ Font:h14
+
+"!!!!! Enable Hard Mode (no mouse use) !!!!!!"
+set mouse=
+nmap <ScrollWheelUp> <nop>
+nmap <S-ScrollWheelUp> <nop>
+nmap <C-ScrollWheelUp> <nop>
+nmap <ScrollWheelDown> <nop>
+nmap <S-ScrollWheelDown> <nop>
+nmap <C-ScrollWheelDown> <nop>
+nmap <ScrollWheelLeft> <nop>
+nmap <S-ScrollWheelLeft> <nop>
+nmap <C-ScrollWheelLeft> <nop>
+nmap <ScrollWheelRight> <nop>
+nmap <S-ScrollWheelRight> <nop>
+nmap <C-ScrollWheelRight> <nop>
+
+
+set autoread
+au CursorHold * checktime
 set scrolloff=2
 set cursorline " highlight current line
 set wildmenu   " visual autocomplete for command menu
@@ -24,11 +43,11 @@ set guioptions-=R
 set guioptions-=r
 set guioptions-=L
 set number
+set tabstop=2
 set linespace=15
 set shiftwidth=2
 set vb
 set t_vb=
-set tabstop=2
 set ai
 set si
 if has("gui_macvim")
@@ -52,6 +71,9 @@ filetype plugin indent on    " required
 "set <Leader> to be ',' instead of default '\'"
 let mapleader=","
 set timeout timeoutlen=1500
+
+"make Backspace Delete on normal mode"
+nnoremap <Backspace> x
 
 "highlight selected line with ,l"
 "noremap <leader>l <ESC>vV
@@ -97,10 +119,13 @@ inoremap <D-tab> <C-p>tab
 " let g:multi_cursor_use_default_mapping=0
 " let g:multi_cursor_next_key='<D-d>'
 " let g:multi_cursor_quit_key='<ESC>'
-" 
+"
 "Duplicate Current line and paste under"
 map <D-D> <nop>
-noremap <D-D> <ESC>vVyi<end><CR><ESC>vp<ESC>i<up><del><esc>
+nnoremap <D-D> <ESC>vVyi<end><CR><ESC>vp<ESC>i<up><del><esc>
+vnoremap <D-D> y<ESC>i<up><ESC>vp<ESC>i
+
+"Select Entire line under cursor"
 map <D-l> <nop>
 map <D-l> <ESC>vV
 
@@ -181,9 +206,9 @@ let g:airline_theme='hybrid'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_tab_type = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-
+let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
-	let g:airline_symbols = {}
+  let g:airline_symbols = {}
 endif
 
 " unicode symbols
@@ -237,6 +262,9 @@ autocmd BufNewFile,BufRead *.ts set filetype=typescript
 autocmd BufNewFile,BufRead *.vue set syntax=vue
 autocmd BufNewFile,BufRead *.tsx set filetype=typescript
 autocmd BufNewFile,BufRead *.tsx set syntax=typescript
+
+"Automatically Remove Trailing Whitespace"
+autocmd BufWritePre * %s/\s\+$//e
 
 "Auto Adjust size of Quickfix window"
 au FileType qf call AdjustWindowHeight(3, 10)

@@ -72,7 +72,6 @@ Plugin 'Shougo/vimproc.vim'
 Plugin 'Quramy/tsuquyomi'
 
 " Plugin 'KabbAmine/gulp-vim'
-
 Plugin 'marijnh/tern_for_vim'
 Plugin 'ramitos/jsctags'
 Plugin 'Valloric/YouCompleteMe'

@@ -1,9 +1,9 @@
 syntax enable
-set nocompatible              " be iMproved, required
+set nocompatible
 set noswapfile
 
 "================Visual Stuff================"
-filetype on                  " required
+filetype on
 filetype indent on
 filetype plugin on
 set background=dark
@@ -12,9 +12,13 @@ set showtabline=1
 colorscheme hybrid_material
 set anti enc=utf-8
 set expandtab
+set smartindent
 "Set macvim font + Nerdtree glyphs made with fontforge -script font-patcher"
-set guifont=Office\ Code\ Pro\ Light\ Nerd\ Font:h14
-" set guifont=SauceCodePro\ Nerd\ Font:h14
+" set guifont=Office\ Code\ Pro\ Light\ Nerd\ Font:h14
+set guifont=SauceCodePro\ Nerd\ Font:h14
+set listchars=tab:▸\ ,eol:¬
+set list
+
 
 "!!!!! Enable Hard Mode (no mouse use) !!!!!!"
 set mouse=
@@ -39,23 +43,25 @@ set cursorline " highlight current line
 set wildmenu   " visual autocomplete for command menu
 set incsearch  " search as characters are entered
 " set hlsearch   " highlight matches
+set smartcase
 set guioptions-=R
 set guioptions-=r
 set guioptions-=L
 set number
 set tabstop=2
+set softtabstop=2
 set linespace=15
 set shiftwidth=2
 set vb
 set t_vb=
 set ai
 set si
+
+" Ignoring case is a fun trick
+set ignorecase
 if has("gui_macvim")
 	set fullscreen
 endif
-":set colorcolumn=72
-" Ignoring case is a fun trick
-set ignorecase
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -129,8 +135,6 @@ vnoremap <D-D> y<ESC>i<up><ESC>vp<ESC>i
 map <D-l> <nop>
 map <D-l> <ESC>vV
 
-
-
 "Normal Mode - Make tab and Shift+tab switch panels"
 nnoremap <Tab> <c-w>w
 nnoremap <S-Tab> <c-w>W
@@ -151,6 +155,10 @@ noremap <D-9> <ESC>:tabn 9<CR>
 " Command-0 goes to the last tab
 noremap <D-0> <ESC>:tablast<CR>
 
+"=================EasyAlign==================="
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 "===============NerdTree Options=================="
 "Map Ctrl+n to toggle Nerdtree"
 map <D-n> :NERDTreeToggle<CR>
@@ -161,6 +169,11 @@ let NERDTreeShowHidden=1
 let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:DevIconsEnableFoldersOpenClose = 1
+let g:webdevicons_conceal_nerdtree_brackets = 1
+let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
+
 
 "You Complete Me Mappings
 let g:key_list_select_completion = ['<Down>']
@@ -204,46 +217,31 @@ set updatetime=250
 let g:airline_theme='hybrid'
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_tab_type = 1
+let g:airline#extensions#tabline#show_tab_type = 0
 let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#whitespace#mixed_indent_algo = 0
 let g:airline_powerline_fonts = 1
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
 
 " unicode symbols
 let g:airline_left_sep = ''
-let g:airline_left_sep = ''
 let g:airline_right_sep = ''
-let g:airline_right_sep = ''
-let g:airline_symbols.linenr = ''
-let g:airline_symbols.linenr = ''
-let g:airline_symbols.linenr = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.paste = ''
-let g:airline_symbols.paste = ''
-let g:airline_symbols.paste = ''
-let g:airline_symbols.whitespace = ''
-
-" airline symbols
-let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
+
+"
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_splits = 0
 let g:airline#extensions#tabline#show_tabs = 1
 let g:airline#extensions#tabline#show_tab_nr = 0
 let g:airline#extensions#tabline#show_tab_type = 0
-let g:airline#extensions#tabline#close_symbol = '×'
+let g:airline#extensions#tabline#close_symbol = 'x'
 let g:airline#extensions#tabline#show_close_button = 0
 
 
 "Change Nerdtree Glyphicons Colors"
 :so ~/.vim/iconsettings.vim
+
+
 "Let syntastic scan for errors on file open"
 let g:syntastic_check_on_open=1
 let g:tsuquyomi_disable_quickfix = 0
@@ -271,3 +269,10 @@ au FileType qf call AdjustWindowHeight(3, 10)
 function! AdjustWindowHeight(minheight, maxheight)
   exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
+
+au WinEnter * :setlocal number
+au WinLeave * :setlocal nonumber
+
+" Automatically resize vertical splits.
+au WinEnter * :set winfixheight
+au WinEnter * :wincmd =

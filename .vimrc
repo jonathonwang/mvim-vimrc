@@ -21,19 +21,19 @@ set list
 
 
 "!!!!! Enable Hard Mode (no mouse use) !!!!!!"
-set mouse=
-nmap <ScrollWheelUp> <nop>
-nmap <S-ScrollWheelUp> <nop>
-nmap <C-ScrollWheelUp> <nop>
-nmap <ScrollWheelDown> <nop>
-nmap <S-ScrollWheelDown> <nop>
-nmap <C-ScrollWheelDown> <nop>
-nmap <ScrollWheelLeft> <nop>
-nmap <S-ScrollWheelLeft> <nop>
-nmap <C-ScrollWheelLeft> <nop>
-nmap <ScrollWheelRight> <nop>
-nmap <S-ScrollWheelRight> <nop>
-nmap <C-ScrollWheelRight> <nop>
+        " set mouse=
+" nmap <ScrollWheelUp> <nop>
+" nmap <S-ScrollWheelUp> <nop>
+" nmap <C-ScrollWheelUp> <nop>
+" nmap <ScrollWheelDown> <nop>
+" nmap <S-ScrollWheelDown> <nop>
+" nmap <C-ScrollWheelDown> <nop>
+" nmap <ScrollWheelLeft> <nop>
+" nmap <S-ScrollWheelLeft> <nop>
+" nmap <C-ScrollWheelLeft> <nop>
+" nmap <ScrollWheelRight> <nop>
+" nmap <S-ScrollWheelRight> <nop>
+" nmap <C-ScrollWheelRight> <nop>
 
 
 set autoread
@@ -122,9 +122,11 @@ inoremap <D-tab> <C-p>tab
 
 
 "Multiple Cursor"
-" let g:multi_cursor_use_default_mapping=0
-" let g:multi_cursor_next_key='<D-d>'
-" let g:multi_cursor_quit_key='<ESC>'
+" map <D-d> <nop>
+let g:multi_cursor_use_default_mapping=0
+let g:multi_cursor_next_key='<D-d>'
+" let g:multi_cursor_start_key='<D-d>'
+let g:multi_cursor_quit_key='<ESC>'
 "
 "Duplicate Current line and paste under"
 map <D-D> <nop>
@@ -173,7 +175,7 @@ let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:DevIconsEnableFoldersOpenClose = 1
 let g:webdevicons_conceal_nerdtree_brackets = 1
 let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
-
+let NERDTreeShowLineNumbers=1
 
 "You Complete Me Mappings
 let g:key_list_select_completion = ['<Down>']
@@ -215,6 +217,7 @@ set updatetime=250
 
 "Change Airline Theme"
 let g:airline_theme='hybrid'
+let g:airline_section_y=''
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_tab_type = 0
@@ -228,7 +231,6 @@ let g:airline_right_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_alt_sep = ''
 
-"
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_splits = 0
 let g:airline#extensions#tabline#show_tabs = 1
@@ -257,7 +259,8 @@ autocmd BufWritePost .gvimrc source %
 "Set syntax typescript on file open for .ts files"
 autocmd BufNewFile,BufRead *.ts set syntax=typescript
 autocmd BufNewFile,BufRead *.ts set filetype=typescript
-autocmd BufNewFile,BufRead *.vue set syntax=vue
+autocmd BufNewFile,BufRead *.vue set syntax=javascript
+autocmd BufNewFile,BufRead *.vue set filetype=javascript
 autocmd BufNewFile,BufRead *.tsx set filetype=typescript
 autocmd BufNewFile,BufRead *.tsx set syntax=typescript
 

@@ -3,17 +3,18 @@ Plugin 'gmarik/Vundle.vim'
 
 "Themes"
 Plugin 'altercation/vim-colors-solarized'
-
+" Plugin 'godlygeek/csapprox'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
+Plugin 'easymotion/vim-easymotion'
 
 "Plugin for Custom Start Page"
-" Plugin 'mhinz/vim-startify';
-" Plugin 'terryma/vim-multiple-cursors'
+Plugin 'mhinz/vim-startify'
+Plugin 'terryma/vim-multiple-cursors'
 
 " Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
